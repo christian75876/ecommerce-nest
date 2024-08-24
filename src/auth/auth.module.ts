@@ -6,6 +6,7 @@ import { GenerateToken, LoginService, MatchPassword, UserValidator } from './ser
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from 'src/user/entities';
+import { JwtStrategy } from './strategies/jwt-strategy';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User]),
@@ -17,9 +18,10 @@ import { User } from 'src/user/entities';
       signOptions: { expiresIn: '1h' },
     }),
   }),
+  ConfigModule.forRoot(),
   ],
   exports: [AuthService],
   controllers: [AuthController],
-  providers: [AuthService, LoginService, GenerateToken, UserValidator, MatchPassword],
+  providers: [AuthService, LoginService, GenerateToken, UserValidator, MatchPassword, JwtStrategy],
 })
 export class AuthModule { }

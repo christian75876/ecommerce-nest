@@ -24,7 +24,8 @@ export class LoginService implements ILoginService {
         if(!checkingPassword) {
             throw new UnauthorizedException("Invalid credentials");
         };
-        const token = this.generateToken.token(user.id, +user.role);
+        const token = this.generateToken.token(user.id, user.roleId);
+        console.log(user.roleId)
         return token
     };
 };

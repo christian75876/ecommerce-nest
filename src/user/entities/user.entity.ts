@@ -12,12 +12,12 @@ export class User {
     @Column({ type: 'varchar', length: 100 })
     password: string;
 
-    // @Column()
-    // roleId:number
+    @Column()
+    roleId:number
 
     @ManyToOne(() => Role, (role: Role) => role.users)
     @JoinColumn({ name: 'roleId' })
-    role: Role;  // Correcto
+    role: number;  // Correcto
 
 
 }

@@ -12,7 +12,6 @@ export class GetUsers{
   ){};
   async getAllUsers(): Promise<User[]>{
     const users = await this.userRepository.find();
-    console.log(users)
     return users
   }
   async getUser(id: number): Promise<User>{
