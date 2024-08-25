@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { CreateProductService, DeleteProductService, FindAllProductService, findOneProductService, UpdateProductService } from './services';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
+
 @Injectable()
 export class ProductService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  constructor(
+    private readonly createProductService: CreateProductService,
+    private readonly updateProductService: UpdateProductService,
+    private readonly findAllProducts: FindAllProductService,
+    private readonly findOneProduct: findOneProductService,
+    private readonly DeleteProductService: DeleteProductService,  
+  ){}
+
+  async create(createProductDto: CreateProductDto) {
+    return this.createProductService.newProduct(createProductDto);
   }
 
   findAll() {
-    return `This action returns all product`;
+    return this.findAllProducts.all();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: string) {
+    return this.findOneProduct.product(id);
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    return await this.updateProductService.updateProduct(id, updateProductDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: string) {
+    return this.DeleteProductService.deleteProduct(id);
   }
 }
