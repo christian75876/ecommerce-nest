@@ -36,7 +36,7 @@ export class ProductController {
 
   @Get(':id')
   @Roles(1, 2)
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.productsService.findOne(id);
   }
 

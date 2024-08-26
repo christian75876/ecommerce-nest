@@ -22,7 +22,7 @@ export class ProductService {
     return this.findAllProducts.all();
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     return this.findOneProduct.product(id);
   }
 
